@@ -2,8 +2,10 @@ package ma.ismagi.springlibrary;
 
 import ma.ismagi.springlibrary.dto.EmpruntDTO;
 import ma.ismagi.springlibrary.dto.ExemplaireDTO;
+import ma.ismagi.springlibrary.dto.LivreDTO;
 import ma.ismagi.springlibrary.models.Emprunt;
 import ma.ismagi.springlibrary.models.Exemplaire;
+import ma.ismagi.springlibrary.models.Livre;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +33,10 @@ public class SpringlibraryApplication {
 					mapper.map(src -> src.getAdherent().getId(), EmpruntDTO::setAdherent);
 					mapper.map(src -> src.getExemplaire().getId(),EmpruntDTO::setExemplaire);
 				}
+		);
+		TypeMap<Livre, LivreDTO> propertyMapper3 =modelMapper.createTypeMap(Livre.class, LivreDTO.class);
+		propertyMapper3.addMappings(
+				mapper -> mapper.map(src -> src.getCategorie().getId(),LivreDTO::setCategorie_id)
 		);
 		return modelMapper;
 	}
