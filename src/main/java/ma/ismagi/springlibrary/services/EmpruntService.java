@@ -11,6 +11,8 @@ public interface EmpruntService {
     Optional<Emprunt> getById(long id);
     List<Emprunt> getByAdherentId(long id);
     List<Emprunt> getByExemplaireId(long id);
+
+    List<Emprunt> getByLivreIsbn(String isbn);
     Emprunt saveOrUpdate(Emprunt emprunt);
     void delete(long id);
     Boolean existsById(long id);

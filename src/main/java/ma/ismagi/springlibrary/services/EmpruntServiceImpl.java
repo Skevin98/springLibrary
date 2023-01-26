@@ -38,6 +38,11 @@ public class EmpruntServiceImpl implements EmpruntService{
     }
 
     @Override
+    public List<Emprunt> getByLivreIsbn(String isbn) {
+        return  empruntRepo.findEmpruntsByExemplaire_LivreIsbn(isbn);
+    }
+
+    @Override
     public Emprunt saveOrUpdate(Emprunt emprunt) {
         return empruntRepo.save(emprunt);
     }
