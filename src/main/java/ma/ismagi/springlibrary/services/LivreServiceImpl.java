@@ -5,6 +5,7 @@ import ma.ismagi.springlibrary.repositories.LivreRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LivreServiceImpl implements LivreService {
@@ -19,6 +20,10 @@ public class LivreServiceImpl implements LivreService {
         return  livreRepo.findAll();
     }
 
+    @Override
+    public Optional<Livre> getByIsbn(String isbn) {
+        return livreRepo.findById(isbn);
+    }
 
 
     @Override
@@ -27,7 +32,7 @@ public class LivreServiceImpl implements LivreService {
     }
 
     @Override
-    public List<Livre> getByCategorieId(long id) {
+    public List<Livre> getByCategorie(long id) {
         return livreRepo.findLivresByCategorie_Id(id);
     }
 

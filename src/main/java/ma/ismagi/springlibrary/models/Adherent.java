@@ -33,8 +33,7 @@ public class Adherent {
     private List<Emprunt> emprunts;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "compte_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "adherent", cascade = CascadeType.ALL)
     private Compte compte;
 
     public Compte getCompte() {

@@ -19,11 +19,18 @@ public class Compte {
     @Column(length = 130)
     private String password;
 
-    private Etat Active;
+    private Boolean active;
 
-    @OneToOne(mappedBy = "compte")
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "adherent_id", referencedColumnName = "id")
     private Adherent adherent;
+
+    public Compte() {
+    }
+
+    public Compte(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;
@@ -49,12 +56,12 @@ public class Compte {
         this.password = password;
     }
 
-    public Etat getActive() {
-        return Active;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setActive(Etat active) {
-        Active = active;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Adherent getAdherent() {

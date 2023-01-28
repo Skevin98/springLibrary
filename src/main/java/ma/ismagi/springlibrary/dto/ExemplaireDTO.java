@@ -1,5 +1,7 @@
 package ma.ismagi.springlibrary.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
@@ -20,4 +22,7 @@ public class ExemplaireDTO {
     float prixRemplacement;
 
     String livre;
+
+    @JsonProperty("Titre Livre")
+    String titre_livre;
 }

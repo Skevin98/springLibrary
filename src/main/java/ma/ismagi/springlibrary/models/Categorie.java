@@ -17,18 +17,23 @@ public class Categorie {
     @Column(nullable = false)
     private String nom_ctgr;
 
-    public List<Livre> getLivres() {
-        return livres;
-    }
-
-    public void setLivres(List<Livre> livres) {
-        this.livres = livres;
-    }
-
-    @OneToMany(targetEntity = Livre.class,mappedBy = "categorie",cascade =CascadeType.ALL)
-    private List<Livre> livres;
+//    public List<Livre> getLivres() {
+//        return livres;
+//    }
+//
+//    public void setLivres(List<Livre> livres) {
+//        this.livres = livres;
+//    }
+//
+//    @OneToMany(targetEntity = Livre.class,mappedBy = "categorie",cascade =CascadeType.ALL)
+//    private List<Livre> livres;
     public Categorie(){}
-//Getter & setter
+
+    public Categorie(long id) {
+        this.id = id;
+    }
+
+    //Getter & setter
     public long getId() {
         return id;
     }

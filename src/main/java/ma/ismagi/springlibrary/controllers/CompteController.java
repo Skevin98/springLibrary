@@ -1,6 +1,8 @@
 package ma.ismagi.springlibrary.controllers;
 
+import ma.ismagi.springlibrary.dto.AdherentDTO;
 import ma.ismagi.springlibrary.dto.CompteDTO;
+import ma.ismagi.springlibrary.models.Adherent;
 import ma.ismagi.springlibrary.models.Compte;
 import ma.ismagi.springlibrary.services.CompteService;
 import org.modelmapper.ModelMapper;
@@ -48,4 +50,28 @@ public class CompteController {
         CompteDTO cmpt = modelMapper.map(compte.get(), CompteDTO.class);
         return new ResponseEntity<>(cmpt, HttpStatus.OK);
     }
+
+
+    @GetMapping("/deactivate/{id}")
+    public ResponseEntity<CompteDTO> deactivate(@PathVariable("id") Long id){
+        Optional<Compte> compte = compteService.getById(id);
+        if(compte.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        CompteDTO cmpt = modelMapper.map(compteService.deactivate(compte.get()), CompteDTO.class);
+        return new ResponseEntity<>(cmpt, HttpStatus.OK);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CompteDTO> updateCompte(@PathVariable("id") long id, @RequestBody Compte compte){
+        if (id!= compte.getId())
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (!compteService.existsById(id))
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        CompteDTO updatedcpt = modelMapper.map(compteService.saveOrUpdate(compte), CompteDTO.class);
+        return new ResponseEntity<>(updatedcpt, HttpStatus.OK);
+
+    }
+
+
 }

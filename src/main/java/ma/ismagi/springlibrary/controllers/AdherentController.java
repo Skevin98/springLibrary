@@ -1,7 +1,9 @@
 package ma.ismagi.springlibrary.controllers;
 
 import ma.ismagi.springlibrary.dto.AdherentDTO;
+import ma.ismagi.springlibrary.dto.LivreDTO;
 import ma.ismagi.springlibrary.models.Adherent;
+import ma.ismagi.springlibrary.models.Livre;
 import ma.ismagi.springlibrary.services.AdherentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,19 @@ public class AdherentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         AdherentDTO adr = modelMapper.map(adherents.get(), AdherentDTO.class);
         return new ResponseEntity<>(adr,HttpStatus.OK);
+
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AdherentDTO> updateAdherent(@PathVariable("id") long id, @RequestBody Adherent adherent){
+        if (id!= adherent.getId())
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (!adherentService.existsById(id))
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        AdherentDTO updatedAdr = modelMapper.map(adherentService.saveOrUpdate(adherent), AdherentDTO.class);
+        return new ResponseEntity<>(updatedAdr, HttpStatus.OK);
+
 
     }
 

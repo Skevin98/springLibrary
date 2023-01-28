@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -35,6 +36,29 @@ public class LivreController {
         return new ResponseEntity<>(lvs, HttpStatus.OK);
 
     }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<LivreDTO>> getByCategorie(@PathVariable("id") long id){
+        List<Livre> livres = livreService.getByCategorie(id);
+
+        List<LivreDTO> lvs = livres.stream()
+                .map(
+                        x->modelMapper.map(x, LivreDTO.class)
+                ).collect(Collectors.toList());
+        return new ResponseEntity<>(lvs, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/{isbn}")
+    public ResponseEntity<LivreDTO> getByIsbn(@PathVariable("isbn") String isbn){
+        Optional<Livre> livre = livreService.getByIsbn(isbn);
+        if (livre.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        LivreDTO l = modelMapper.map(livre.get(), LivreDTO.class);
+        return new ResponseEntity<>(l, HttpStatus.OK);
+    }
+
+
     @PostMapping("/")
     public ResponseEntity<Livre> addLivre(@RequestBody Livre livre){
         Livre savedLivre = livreService.saveOrUpdate(livre);

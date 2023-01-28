@@ -42,6 +42,15 @@ public class CompteServiceImpl implements CompteService {
     }
 
     @Override
+    public Compte deactivate(Compte compte) {
+        if (!compte.getActive())
+            compte.setActive(true);
+        else
+            compte.setActive(false);
+        return compteRepo.save(compte);
+    }
+
+    @Override
     public Boolean existsById(long id) {
         return compteRepo.existsById(id);
     }

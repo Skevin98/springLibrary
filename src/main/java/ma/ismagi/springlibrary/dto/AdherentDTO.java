@@ -17,7 +17,5 @@ public class AdherentDTO {
 
     private LocalDate date_inscription;
 
-    private Long emprunt;
-
     private Long compte;
 }

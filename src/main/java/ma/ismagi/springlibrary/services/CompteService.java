@@ -17,5 +17,7 @@ public interface CompteService {
 
     void delete(long id);
 
+    Compte deactivate(Compte compte);
+
     Boolean existsById(long id);
 }

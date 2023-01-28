@@ -1,5 +1,7 @@
 package ma.ismagi.springlibrary.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -14,5 +16,8 @@ public class LivreDTO {
     @NotBlank(message = "Le nom de l'auteur est obligatoire")
     private String auteur;
     @NotBlank(message ="l'id est obligatoire")
-    private long categorie_id;
+    private long categorie;
+
+    @JsonProperty("Nom categorie")
+    private String nom_ctrg;
 }
